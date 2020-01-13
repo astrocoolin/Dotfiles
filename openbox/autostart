@@ -1,0 +1,14 @@
+#
+# These things are run when an Openbox X Session is started.
+# You may place a similar script in $HOME/.config/openbox/autostart
+# to run user-specific things.
+#
+
+feh --bg-fill ~/Pictures/shack.jpg --bg-fill ~/Pictures/shack.jpg
+compton &
+tint2 &
+redshift -l 43.6532:-79.3832 &
+sleep 10 &
+blueman-applet &
+#light-locker &
+thunderbird &

@@ -1,0 +1,265 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/jaagr/polybar
+;
+;   The README contains alot of information
+;
+;==========================================================
+
+
+[colors]
+;background = #282a36
+background = #586e75
+background-alt = #073642
+;foreground = #93a1a1
+foreground-alt = #ffffff
+foreground = #eee8d5
+active = #2aa198
+primary = #ffb52a
+red = #dc322f 	
+green = #859900
+yellow = #b58900
+secondary = #e60053
+alert = #bd2c40
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[bar/bottom]
+;monitor = eDP1
+bottom = true
+width = 99%
+height = 50
+fixed-center = true
+background = ${colors.background}
+foreground = ${colors.foreground}
+padding-left = 0
+padding-right = 0
+module-margin-left = 0
+module-margin-right = 0
+
+
+font-0 = font\-logos:style=logos:size=30;5
+font-1 = Space Mono for Powerline:style=Regular:size=13;3
+font-2 = UbuntuMono Nerd Font:size=14;3
+font-3 = Space Mono for Powerline:style=Bold:size=10;3
+;font-4 = Space Mono for Powerline:style=Bold:size=30;3
+font-4 = UbuntuMono Nerd Font:size=18;3
+
+
+;modules-left = emwh
+modules-right = weather temperature battery date
+
+;tray-position = right
+;tray-foreground = ${colors.foreground}
+;tray-padding = 2
+
+line-size = 2
+
+module-margin = 0
+
+cursor-click = pointer
+cursor-scroll = ns-resize
+
+override-redirect=true
+
+;separator = " | "
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/battery]
+type = internal/battery
+format-charging = " | <animation-charging> <label-charging>"
+format-full = " | <ramp-capacity> <label-full>"
+format-discharging = " | <ramp-capacity> <label-discharging>"
+
+label-charging = "%percentage%%"
+label-full = "%percentage%%"
+;label-full = " Fully charged  "
+label-discharging = "%percentage%%"
+
+ramp-capacity-0-foreground = ${colors.red}
+ramp-capacity-0 = 
+ramp-capacity-1-foreground = ${colors.red}
+ramp-capacity-1 = 
+ramp-capacity-2-foreground = ${colors.yellow}
+ramp-capacity-2 = 
+ramp-capacity-3-foreground = ${colors.yellow}
+ramp-capacity-3 = 
+ramp-capacity-4-foreground = ${colors.green}
+ramp-capacity-4 = 
+
+animation-charging-0 = ""
+animation-charging-1 = ""
+animation-charging-2 = ""
+animation-charging-3 = ""
+animation-charging-4 = ""
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/cpu]
+type = internal/cpu
+format = <label>
+label = "|  %percentage%%"
+interval = 10
+format-background = #44475a	
+format-foreground = #f5f5f5
+format-prefix-foreground = #44475a	
+format-prefix-background = ${colors.background}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/menu]
+type = custom/text
+format = <label>
+label = ""
+content = "  "
+click-left= rofi -show drun -display-drun "Search " -hide-scrollbar true
+;format-active-font = 3
+;content-active-font = 3
+content-foreground = ${colors.foreground}
+content-background = ${colors.background}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/temperature]
+type = internal/temperature
+format = <label>
+interval = 10
+label = " |  %temperature-c% "
+format-background = ${colors.background}
+format-foreground = ${colors.foreground}
+;format-prefix-foreground = #44475a
+;format-prefix-background = ${colors.background}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/alsa]
+type = internal/alsa
+;use-ui-max = true
+interval = 5
+format-volume = "<ramp-volume> <label-volume>  "
+format-muted = <label-muted>
+label-muted = "   Muted  "
+ramp-volume-0 ="  "
+ramp-volume-1 ="   "
+ramp-volume-2 =" 墳"
+format-volume-background = #6272a4
+format-volume-foreground = #f8f8f8
+format-volume-prefix-foreground = #6272a4	
+format-volume-prefix-background = #f1fa8c	
+format-muted-background = #6272a4
+format-muted-foreground = #f8f8f8
+format-muted-prefix-foreground = #6272a4	
+format-muted-prefix-background = #f1fa8c	
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/backlight]
+type = internal/xbacklight
+enable-scroll = true
+format = <label>
+label = "    %percentage%%"
+format-background = #f1fa8c
+format-foreground = #212121
+format-prefix-foreground = #f1fa8c	
+format-prefix-background = #ffb86c	
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/wireless-network]
+type = internal/network
+format-connected = 
+format-disconnected = 
+;format-connected =   <label-connected>
+;format-disconnected =   <label-connected>
+label-connected = %essid% :  %upspeed%   %downspeed%
+interface = wlp1s0
+format-disconnected-background = #ff5555
+format-disconnected-suffix-foreground = ${colors.background-alt}
+format-disconnected-suffix-background = #ff5555	
+format-disconnected-prefix-foreground = ${colors.background-alt}
+format-disconnected-prefix-background = ${colors.background-alt}
+format-connected-background = #ff5555
+format-connected-foreground = #212121
+format-connected-suffix-foreground = #ff5555
+format-connected-suffix-background = 282a36
+format-connected-prefix-foreground = #ff5555	
+format-connected-prefix-background = #ff5555	
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/ip]
+type = internal/network
+interface = wlp1s0
+format-connected =  <label-connected>
+format-disconnected = <label-disconnected>
+label-disconnected = Not Connected
+label-connected = %local_ip%
+format-connected-background = #bd93f9	
+format-connected-foreground = #212121
+format-connected-suffix-foreground = #bd93f9
+format-connected-suffix-background = #ff5555
+format-connected-prefix-foreground = #bd93f9
+format-connected-prefix-background = #bd93f9
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/title]
+type = internal/xwindow
+
+; Available tags:
+;   <label> (default)
+format = <label>
+;format-background = ${colors.background}
+format-background = ${colors.background}
+format-foreground = ${colors.active}
+format-padding = 4
+
+; Available tokens:
+;   %title%
+; Default: %title%
+label = %{T4}%title%
+label-maxlen = 50
+label-active-font = 2
+
+; Used instead of label when there is no window title
+; Available tokens:
+;   None
+label-empty = - 
+label-empty-foreground = ${colors.active}
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/emwh]
+type = internal/xworkspaces
+pin-workspaces = false
+enable-click = true
+enable-scroll = false
+format-padding = 1
+icon-default = 
+format = <label-state>
+label-active = "%{T5}%name%"
+label-occupied = "%{T5}%name%"
+label-urgent = "%{T5}%name%"
+label-empty = "%{T5}%name%"
+label-occupied-padding = 1
+label-empty-padding = 1
+label-urgent-padding = 1
+label-active-padding = 1
+
+label-active-foreground = ${colors.active}
+label-active-underline = ${colors.active}
+
+label-empty-foreground = ${colors.foreground-alt}
+label-urgent-foreground = ${colors.foreground-alt}
+label-urgent-underline = ${colors.foreground-alt}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+[module/date]
+type = internal/date
+interval = 1.0
+date = "%d %B"
+time = "%l:%M%p"
+date-alt = "%d %B"
+time-alt = %H:%M
+format = <label>
+label = " | %time% on %date% "
+format-foreground = ${colors.foreground}
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+[module/weather]
+type = custom/script
+exec = python3 ~/.config/polybar/scripts/weather.py
+interval = 300
+format-background = ${colors.background}
+format-foreground = ${colors.foreground}
+

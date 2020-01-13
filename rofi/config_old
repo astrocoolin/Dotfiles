@@ -1,0 +1,6 @@
+rofi.combi-modi:    window,drun,ssh
+rofi.theme:         arthur
+rofi.theme:         solarized
+rofi.font:          Space Mono for Powerline Regular 12
+rofi.modi:          combi,drun
+rofi.theme: ~/.config/rofi/solarized_alternate.rasi
